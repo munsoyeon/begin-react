@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import Counter from "./Counter";
 import CreateUser from "./CreateUser";
 import Hello from "./Hello";
@@ -6,6 +6,10 @@ import InputSample from "./InputSample";
 import UserList from "./UserList";
 import Wrapper from "./Wrapper";
 
+function countActiveusers(users) {
+  console.log("활성 사용자 수를 세는 중..");
+  return users.filter((user) => user.active).length;
+}
 function App() {
   const [inputs, setInputs] = useState({
     username: "",
@@ -60,6 +64,8 @@ function App() {
       )
     );
   }; /* 안에 있는 원소를 업데이트해야할때도 map 사용 */
+  // const count = countActiveusers(users); // 이렇게만 작성하면 input에 입력할때 계속해서 기능이 돌아감.
+  const count = useMemo(() => countActiveusers(users), [users]); //users가 바뀔때에만 호출이 되고 아니면 이전것을 재사용한다.
   return (
     <>
       <Wrapper>
@@ -79,6 +85,7 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>활성 사용자 수 : {count}</div>
     </>
   );
 }

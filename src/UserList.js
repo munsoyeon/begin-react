@@ -1,16 +1,26 @@
 import React, { useEffect } from "react";
 
 function User({ user, onRemove, onToggle }) {
+  // useEffect(() => {
+  //   console.log("컴포넌트가 나타남");
+  //   // props -> state
+  //   // REST API
+  //   // D3 Video.js
+  //   // setInterval, setTimeout
+  //   return () => {
+  //     // clearInterval, clearTimeout
+  //     // 라이브러리 인스턴스 제거
+  //     console.log("컴포넌트가 사라짐");
+  //   };
+  // }, []);
   useEffect(() => {
-    console.log("컴포넌트가 나타남");
-    // props -> state
-    // REST API
-    // D3 Video.js
-    // setInterval, setTimeout
+    console.log("user값이 설정됨");
+    console.log(user);
     return () => {
-      console.log("컴포넌트가 사라짐");
+      console.log("user 값이 바뀌기 전");
+      console.log(user);
     };
-  }, []);
+  }, [user]);
   return (
     <div>
       <b
